@@ -5,7 +5,7 @@ const { tokenDecoder } = require("../middleware/auth.middleware");
 const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
-// noteRouter.use(tokenDecoder);
+noteRouter.use(tokenDecoder);
 //getRequest;
 noteRouter.get("/get", async (req, res) => {
   try {
@@ -33,7 +33,9 @@ noteRouter.post("/add", async (req, res) => {
     }
 
     let email = req.email;
+    console.log("email", email);
     let dataAdded = new noteModal({ ...req.body, email });
+    console.log("dataAdded", dataAdded);
     await dataAdded.save();
     res.status(200).send({ msg: "Data Added Success", dataAdded });
   } catch (err) {
