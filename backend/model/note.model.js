@@ -4,6 +4,7 @@ const schema = mongoose.Schema(
     email: String,
     title: String,
     description: String,
+    time: String,
   },
   {
     versionKey: false,

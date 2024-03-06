@@ -69,4 +69,34 @@ noteRouter.get("/search", async (req, res) => {
   }
 });
 
+noteRouter.patch("/time", async (req, res) => {
+  try {
+    const { noteId, time } = req.body;
+
+    // Check if noteId and time are provided
+    if (!noteId || !time) {
+      return res.status(400).send({ msg: "Please provide noteId and time" });
+    }
+
+    // Find the note by its ID and update the time
+    const updatedNote = await noteModal.findByIdAndUpdate(
+      noteId,
+      { time },
+      { new: true } // Return the updated note after the update
+    );
+
+    // Check if the note was found and updated
+    if (!updatedNote) {
+      return res.status(404).send({ msg: "Note not found" });
+    }
+
+    res
+      .status(200)
+      .send({ msg: "Time updated successfully", data: updatedNote });
+  } catch (err) {
+    console.error("Error updating time:", err);
+    res.status(500).send({ msg: "Internal server error" });
+  }
+});
+
 module.exports = { noteRouter };
