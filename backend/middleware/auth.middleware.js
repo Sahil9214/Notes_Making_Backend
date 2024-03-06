@@ -12,7 +12,7 @@ function tokenDecoder(req, res, next) {
         return res.status(400).send({ msg: err });
       } else {
         let email = decoded.email;
-        console.log("email********************", email);
+
         req.email = email;
         next();
       }

@@ -35,7 +35,7 @@ noteRouter.post("/add", async (req, res) => {
     let email = req.email;
     console.log("email", email);
     let dataAdded = new noteModal({ ...req.body, email });
-    console.log("dataAdded", dataAdded);
+
     await dataAdded.save();
     res.status(200).send({ msg: "Data Added Success", dataAdded });
   } catch (err) {
@@ -46,18 +46,18 @@ noteRouter.post("/add", async (req, res) => {
 //search Request;
 
 noteRouter.get("/search", async (req, res) => {
-  let { title, description } = req.query;
+  let { userQuery } = req.query;
   let email = req.email;
 
   try {
-    if (!title || !description) {
-      return res.status(400).send({ msg: "Title Dalana bul gaya bhai" });
+    if (!userQuery) {
+      return res.status(400).send({ msg: "UserQuery Dalana bul gaya bhai" });
     } else {
       const searchResults = await noteModal.find({
         email,
         $or: [
-          { title: { $regex: title, $options: "i" } },
-          { description: { $regex: description, $options: "i" } },
+          { title: { $regex: userQuery, $options: "i" } },
+          { description: { $regex: userQuery, $options: "i" } },
         ],
       });
       res.status(200).send({ msg: "Search Results", data: searchResults });
