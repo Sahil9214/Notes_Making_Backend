@@ -51,7 +51,7 @@ noteRouter.get("/search", async (req, res) => {
 
   try {
     if (!userQuery) {
-      return res.status(400).send({ msg: "UserQuery Dalana bul gaya bhai" });
+      return res.status(400).send({ msg: "userQuery Dalana bul gaya bhai" });
     } else {
       const searchResults = await noteModal.find({
         email,
