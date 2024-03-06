@@ -5,7 +5,7 @@ const { tokenDecoder } = require("../middleware/auth.middleware");
 const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
-noteRouter.use(tokenDecoder);
+// noteRouter.use(tokenDecoder);
 //getRequest;
 noteRouter.get("/get", async (req, res) => {
   try {
