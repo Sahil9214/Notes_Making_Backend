@@ -72,7 +72,7 @@ noteRouter.get("/search", async (req, res) => {
 noteRouter.patch("/time", async (req, res) => {
   try {
     const { noteId, time } = req.body;
-
+    console.log(noteId, time);
     // Check if noteId and time are provided
     if (!noteId || !time) {
       return res.status(400).send({ msg: "Please provide noteId and time" });
